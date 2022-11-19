@@ -1,4 +1,5 @@
-class BlackHole extends LivingCreature {
+var LivingCreature = require("LivingCreature.js")
+module.exports = class BlackHole extends LivingCreature {
     constructor(x, y) {
         super(x, y)
     }

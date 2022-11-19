@@ -171,4 +171,7 @@ function draw() {
     for (var i in blackholeArr) {
         blackholeArr[i].chooseCell()
     }
+
+
+   
 }
