@@ -17,7 +17,7 @@ module.exports = class Energy extends LivingCreature {
             [this.x + 1, this.y + 1]
         ];
     }
-    chooseCell(character) {
+    chooseCell3(character) {
         this.getNewCoordinates()
         return super.chooseCell(character);
     }

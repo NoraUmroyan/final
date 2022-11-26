@@ -12,7 +12,50 @@
 </head>
 
 <body>
-    <button>SAVE</button>
+    <table style="border: 1px solid black; border-radius: 10px; background-color:bisque">
+        <tr>
+            <th style="border: 1px solid black; border-radius: 10px;  background-color:white">Name</th>
+            <th style="border: 1px solid black; border-radius: 10px;  background-color:white">Color</th>
+            <th style="border: 1px solid black; border-radius: 10px;  background-color:white">Function</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; border-radius: 10px; color:black; background-color:white">Grass</td>
+            <td style="border: 1px solid black; border-radius: 10px; background-color:green; color:white">Green</td>
+            <td style="border: 1px solid black; border-radius: 10px; color:black;  background-color:white">Spawns</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; border-radius: 10px; color:black;  background-color:white">GrassEater</td>
+            <td style="border: 1px solid black; border-radius: 10px; background-color:yellow; color:black">Yellow</td>
+            <td style="border: 1px solid black; border-radius: 10px; color:black;  background-color:white">Eats grass</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; border-radius: 10px; color:black; background-color:white">Predator</td>
+            <td style="border: 1px solid black; border-radius: 10px; background-color:red; color:black">Red</td>
+            <td style="border: 1px solid black; border-radius: 10px; color:black;  background-color:white">Eats GrassEater</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; border-radius: 10px; color:black;  background-color:white">BlackHole</td>
+            <td style="border: 1px solid black; border-radius: 10px; background-color:black; color:white">Black</td>
+            <td style="border: 1px solid black; border-radius: 10px; color:black;  background-color:white">Destroys GrassEater and Predator</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; border-radius: 10px; color:black; background-color:white">Energy</td>
+            <td style="border: 1px solid black; border-radius: 10px; background-color:blue; color:black">Blue</td>
+            <td style="border: 1px solid black; border-radius: 10px; color:black; background-color:white">Gives energy to GrassEater</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; border-radius: 10px; color:black; background-color:white">Energy2</td>
+            <td style="border: 1px solid black; border-radius: 10px; background-color:orange; color:black">Orange</td>
+            <td style="border: 1px solid black; border-radius: 10px; color:black; background-color:white">Gives energy to Predator</td>
+        </tr>
+
+    </table>
+
+    <button id="button1" style="background-color:aquamarine">Start</button>
+    <button id="button2" style="background-color:green; color:white">Add GrassEater</button>
+    <button id="button3" style="background-color:red">Add Predator</button>
+    <button id="button3" style="background-color:black; color:white">Add BlackHole</button>
+
 </body>
 
 </html>

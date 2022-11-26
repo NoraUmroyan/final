@@ -1,9 +1,9 @@
 var socket = io();
-var side = 30;
+var side = 20;
 var matrix = [];
 function setup() {
     frameRate(5);
-    createCanvas(30 * side, 30 * side);
+    createCanvas(20 * side, 20 * side);
     background('#acacac');
     
 }
@@ -33,13 +33,27 @@ function draww(matrix) {
                     else if (matrix[y][x] == 6) {
                         fill("black");
                     }
+                  /*  else if (matrix[y][x] == 8) {
+                        fill("pink");
+                    }
+                    else if (matrix[y][x] == 9) {
+                        fill("Cyan");
+                    }
+                    else if (matrix[y][x] == 10) {
+                        fill("brown");
+                    }
+                    else if (matrix[y][x] == 11) {
+                        fill("grey");
+                    }*/
+
+
                     rect(x * side, y * side, side, side);
         
                 }
            
             }
-console.log(matrix)
 
 }
+
 
 socket.on('send matrix', draww)

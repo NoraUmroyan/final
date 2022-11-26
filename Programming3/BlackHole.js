@@ -15,7 +15,7 @@ module.exports = class BlackHole extends LivingCreature {
             [this.x + 1, this.y + 1]
         ];
     }
-    chooseCell(character) {
+    chooseCell5(character) {
         return super.chooseCell(character);
     }
 

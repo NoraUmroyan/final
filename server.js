@@ -1,8 +1,10 @@
- express = require('express');
+const { info } = require('console');
 
- app = express();
+express = require('express');
 
- server = require('http').createServer(app);
+app = express();
+
+server = require('http').createServer(app);
 
 io = require('socket.io')(server);
 
@@ -14,6 +16,10 @@ app.get('/', function (req, res) {
     res.redirect('index.html');
 
 });
+//let days = 0;
+
+
+
 LivingCreature = require("./Programming3/LivingCreature.js")
 Grass = require("./Programming3/Grass.js")
 GrassEater = require("./Programming3/GrassEater.js")
@@ -32,7 +38,7 @@ energy2Arr = []
 blackholeArr = []
 
 function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
-     matrix = []
+    matrix = []
     for (let i = 0; i < matLen; i++) {
         matrix[i] = []
         for (let j = 0; j < matLen; j++) {
@@ -50,7 +56,6 @@ function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
     for (let i = 0; i < grEat; i++) {
         let x = Math.floor(Math.random() * matLen)
         let y = Math.floor(Math.random() * matLen)
-        console.log(x, y);
         if (matrix[y][x] == 0) {
             matrix[y][x] = 2
         }
@@ -59,7 +64,6 @@ function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
     for (let i = 0; i < predator; i++) {
         let x = Math.floor(Math.random() * matLen)
         let y = Math.floor(Math.random() * matLen)
-        console.log(x, y);
         if (matrix[y][x] == 0) {
             matrix[y][x] = 3
         }
@@ -67,7 +71,6 @@ function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
     for (let i = 0; i < energy; i++) {
         let x = Math.floor(Math.random() * matLen)
         let y = Math.floor(Math.random() * matLen)
-        console.log(x, y);
         if (matrix[y][x] == 0) {
             matrix[y][x] = 4
         }
@@ -75,7 +78,6 @@ function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
     for (let i = 0; i < energy2; i++) {
         let x = Math.floor(Math.random() * matLen)
         let y = Math.floor(Math.random() * matLen)
-        console.log(x, y);
         if (matrix[y][x] == 0) {
             matrix[y][x] = 5
         }
@@ -83,7 +85,6 @@ function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
     for (let i = 0; i < blackhole; i++) {
         let x = Math.floor(Math.random() * matLen)
         let y = Math.floor(Math.random() * matLen)
-        console.log(x, y);
         if (matrix[y][x] == 0) {
             matrix[y][x] = 6
         }
@@ -103,42 +104,39 @@ function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
 }
 
 
- matrix = generate(30, 55, 22, 8, 5, 5, 1)
+matrix = generate(20, 55, 22, 8, 5, 5, 1)
 
 
-function game1() {
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
 
-            if (matrix[y][x] == 1) {
-                let gr = new Grass(x, y)
-                grassArr.push(gr)
-            } else if (matrix[y][x] == 2) {
-                let gr = new GrassEater(x, y)
-                grassEaterArr.push(gr)
-            }
-            else if (matrix[y][x] == 3) {
-                let gr = new Predator(x, y)
-                PredatorArr.push(gr)
-            }
-            else if (matrix[y][x] == 4) {
-                let gr = new Energy(x, y)
-                energyArr.push(gr)
-            }
-            else if (matrix[y][x] == 5) {
-                let gr = new Energy2(x, y)
-                energy2Arr.push(gr)
-            }
-            else if (matrix[y][x] == 6) {
-                let gr = new BlackHole(x, y)
-                blackholeArr.push(gr)
-            }
+for (var y = 0; y < matrix.length; y++) {
+    for (var x = 0; x < matrix[y].length; x++) {
 
+        if (matrix[y][x] == 1) {
+            let gr = new Grass(x, y)
+            grassArr.push(gr)
+        } else if (matrix[y][x] == 2) {
+            let gr = new GrassEater(x, y)
+            grassEaterArr.push(gr)
         }
+        else if (matrix[y][x] == 3) {
+            let gr = new Predator(x, y)
+            PredatorArr.push(gr)
+        }
+        else if (matrix[y][x] == 4) {
+            let gr = new Energy(x, y)
+            energyArr.push(gr)
+        }
+        else if (matrix[y][x] == 5) {
+            let gr = new Energy2(x, y)
+            energy2Arr.push(gr)
+        }
+        else if (matrix[y][x] == 6) {
+            let gr = new BlackHole(x, y)
+            blackholeArr.push(gr)
+        }
+
     }
 }
-setInterval(game1, 1000 )
-
 
 function game() {
     for (var i in grassArr) {
@@ -158,9 +156,47 @@ function game() {
         energy2Arr[i].die()
     }
     for (var i in blackholeArr) {
-        blackholeArr[i].chooseCell()
+        blackholeArr[i].chooseCell5()
     }
+    /*
+    days++
+    if (days < 10) { info.season = "spring"; MulSpeed = 1;
+     for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 0) {
+              matrix[y][x] == 8
+        }
+     }
+    }
+}
+    else if (days >= 10 && days < 20) { info.season = "summer"; MulSpeed = 2;
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 0) {
+              matrix[y][x] == 9
+        }
+     }
+    }
+}
+    else if (days >= 20 && days < 30) { info.season = "fall"; MulSpeed = 0.5;
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 0) {
+              matrix[y][x] == 10
+        }
+     }
+    }
+}
+    else { info.season = "winter"; MulSpeed = 0;
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 0) {
+              matrix[y][x] == 11
+        }
+     }
+    }
+}*/
     io.sockets.emit("send matrix", matrix);
 }
-setInterval(game, 1000)
+setInterval(game, 250)
 

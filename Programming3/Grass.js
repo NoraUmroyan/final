@@ -2,7 +2,7 @@ var LivingCreature = require("./LivingCreature.js")
 module.exports = class Grass extends LivingCreature {
     mul() {
         this.multiply++;
-        var emptyCells = this.chooseCell(0);
+        var emptyCells = super.chooseCell(0);
         var newCell = super.random(emptyCells);
 
         if (newCell && this.multiply >= 8) {
