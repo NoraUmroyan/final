@@ -1,10 +1,10 @@
-var express = require('express');
+ express = require('express');
 
-var app = express();
+ app = express();
 
-var server = require('http').createServer(app);
+ server = require('http').createServer(app);
 
-var io = require('socket.io')(server);
+io = require('socket.io')(server);
 
 
 app.use(express.static("./Programming3"));
@@ -14,24 +14,25 @@ app.get('/', function (req, res) {
     res.redirect('index.html');
 
 });
- 
- Grass = require("./Programming3/Grass.js")
- GrassEater = require("./Programming3/GrassEater.js")
- Predator = require("./Programming3/Predator.js")
- BlackHole = require("./Programming3/BlackHole.js")
- Energy = require("./Programming3/Energy.js")
- Energy2= require("./Programming3/Energy2.js")
+LivingCreature = require("./Programming3/LivingCreature.js")
+Grass = require("./Programming3/Grass.js")
+GrassEater = require("./Programming3/GrassEater.js")
+Predator = require("./Programming3/Predator.js")
+BlackHole = require("./Programming3/BlackHole.js")
+Energy = require("./Programming3/Energy.js")
+Energy2 = require("./Programming3/Energy2.js")
 
 server.listen(3000);
-let grassArr = []
-let grassEaterArr = []
-let PredatorArr = []
-let energyArr = []
-let energy2Arr = []
-let blackholeArr = []
+
+grassArr = []
+grassEaterArr = []
+PredatorArr = []
+energyArr = []
+energy2Arr = []
+blackholeArr = []
 
 function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
-    var matrix = []
+     matrix = []
     for (let i = 0; i < matLen; i++) {
         matrix[i] = []
         for (let j = 0; j < matLen; j++) {
@@ -102,64 +103,64 @@ function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
 }
 
 
-let matrix = generate(30, 55, 22, 8, 5, 5, 1)
+ matrix = generate(30, 55, 22, 8, 5, 5, 1)
 
 
-function game1(){
-for (var y = 0; y < matrix.length; y++) {
-    for (var x = 0; x < matrix[y].length; x++) {
+function game1() {
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
 
-        if (matrix[y][x] == 1) {
-            let gr = new Grass(x, y)
-            grassArr.push(gr)
-        } else if (matrix[y][x] == 2) {
-            let gr = new GrassEater(x, y)
-            grassEaterArr.push(gr)
-        }
-        else if (matrix[y][x] == 3) {
-            let gr = new Predator(x, y)
-            PredatorArr.push(gr)
-        }
-        else if (matrix[y][x] == 4) {
-            let gr = new Energy(x, y)
-            energyArr.push(gr)
-        }
-        else if (matrix[y][x] == 5) {
-            let gr = new Energy2(x, y)
-            energy2Arr.push(gr)
-        }
-        else if (matrix[y][x] == 6) {
-            let gr = new BlackHole(x, y)
-            blackholeArr.push(gr)
-        }
+            if (matrix[y][x] == 1) {
+                let gr = new Grass(x, y)
+                grassArr.push(gr)
+            } else if (matrix[y][x] == 2) {
+                let gr = new GrassEater(x, y)
+                grassEaterArr.push(gr)
+            }
+            else if (matrix[y][x] == 3) {
+                let gr = new Predator(x, y)
+                PredatorArr.push(gr)
+            }
+            else if (matrix[y][x] == 4) {
+                let gr = new Energy(x, y)
+                energyArr.push(gr)
+            }
+            else if (matrix[y][x] == 5) {
+                let gr = new Energy2(x, y)
+                energy2Arr.push(gr)
+            }
+            else if (matrix[y][x] == 6) {
+                let gr = new BlackHole(x, y)
+                blackholeArr.push(gr)
+            }
 
+        }
     }
 }
-}
-setInterval(game1,1000)
+setInterval(game1, 1000 )
 
 
-    function game() {
-        for (var i in grassArr) {
-            grassArr[i].mul()
-        }
-        
-        for (let i in grassEaterArr) {
-            grassEaterArr[i].eat()
-        }
-        for (var i in PredatorArr) {
-            PredatorArr[i].eat()
-        }
-        for (var i in energyArr) {
-            energyArr[i].die()
-        }
-        for (var i in energy2Arr) {
-            energy2Arr[i].die()
-        }
-        for (var i in blackholeArr) {
-            blackholeArr[i].chooseCell()
-        }
-        io.socket.emit("send matrix", matrix);
+function game() {
+    for (var i in grassArr) {
+        grassArr[i].mul()
     }
-    setInterval(game,1000)
-   
+
+    for (let i in grassEaterArr) {
+        grassEaterArr[i].eat()
+    }
+    for (var i in PredatorArr) {
+        PredatorArr[i].eat()
+    }
+    for (var i in energyArr) {
+        energyArr[i].die()
+    }
+    for (var i in energy2Arr) {
+        energy2Arr[i].die()
+    }
+    for (var i in blackholeArr) {
+        blackholeArr[i].chooseCell()
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+setInterval(game, 1000)
+

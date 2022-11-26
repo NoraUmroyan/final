@@ -8,7 +8,7 @@ function setup() {
     
 }
 
-function draw(matrix) {
+function draww(matrix) {
             for (var y = 0; y < matrix.length; y++) {
                 for (var x = 0; x < matrix[y].length; x++) {
         
@@ -36,13 +36,10 @@ function draw(matrix) {
                     rect(x * side, y * side, side, side);
         
                 }
-           // socket.on('send matrix', draw)
+           
             }
-
+console.log(matrix)
 
 }
-setInterval(
-    function () {
-    socket.on('send matrix', draw)
-    }, 1000
-    )
+
+socket.on('send matrix', draww)
