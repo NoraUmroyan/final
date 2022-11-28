@@ -1,4 +1,3 @@
-const { info } = require('console');
 
 express = require('express');
 
@@ -16,8 +15,16 @@ app.get('/', function (req, res) {
     res.redirect('index.html');
 
 });
-//let days = 0;
-
+days = 0;
+var info = {
+    "season" : "spring",
+     "grass" : 0,
+     "grasseater" : 0,
+     "predator" : 0,
+     "energy" : 0,
+     "energy2" : 0,
+     "blackhole" : 0
+}
 
 
 LivingCreature = require("./Programming3/LivingCreature.js")
@@ -104,7 +111,7 @@ function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
 }
 
 
-matrix = generate(20, 55, 22, 8, 5, 5, 1)
+matrix = generate(20, 55, 22, 5, 5, 5, 1)
 
 
 
@@ -158,45 +165,31 @@ function game() {
     for (var i in blackholeArr) {
         blackholeArr[i].chooseCell5()
     }
-    /*
+    
     days++
-    if (days < 10) { info.season = "spring"; MulSpeed = 1;
-     for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 0) {
-              matrix[y][x] == 8
-        }
-     }
-    }
+    if (days < 30) { info.season = "spring"
 }
-    else if (days >= 10 && days < 20) { info.season = "summer"; MulSpeed = 2;
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 0) {
-              matrix[y][x] == 9
-        }
-     }
-    }
+    else if (days >= 30 && days < 60) { info.season = "summer";
 }
-    else if (days >= 20 && days < 30) { info.season = "fall"; MulSpeed = 0.5;
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 0) {
-              matrix[y][x] == 10
-        }
-     }
-    }
+    else if (days >= 60 && days < 90) { info.season = "fall"  
 }
-    else { info.season = "winter"; MulSpeed = 0;
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 0) {
-              matrix[y][x] == 11
-        }
-     }
-    }
-}*/
-    io.sockets.emit("send matrix", matrix);
+    else if(days >= 90 && days < 120) { info.season = "winter"
 }
-setInterval(game, 250)
+
+   info.grass = grassArr.length;
+   info.grasseater = grassEaterArr.length;
+   info.predator = PredatorArr.length;
+   info.energy = energyArr.length;
+   info.energy2 = energy2Arr.length;
+   info.blackhole = blackholeArr.length;
+   console.log(info);
+  io.sockets.emit("send matrix", matrix);
+}
+setInterval(game, 300)
+
+//avelacnel,vor cuyc ta statistican,
+//exanaki popoxutyuny guynerov ev ,
+//ete stacvi,naev xoti bazmacman aragutyuny poxvi yst exanaki
+//avelacnel nor heros` virus,vorin kpnelov mi hetaqrqir ban klini
+//mek el knopkaner avelacnel,vor virus avelacnenq,kam xaxy sksvi sxmeluc
 

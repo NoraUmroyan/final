@@ -1,6 +1,7 @@
 var LivingCreature = require("./LivingCreature.js")
 module.exports = class Grass extends LivingCreature {
-    mul() {
+
+  mul() {
         this.multiply++;
         var emptyCells = super.chooseCell(0);
         var newCell = super.random(emptyCells);
@@ -12,7 +13,20 @@ module.exports = class Grass extends LivingCreature {
 
             var newGrass = new Grass(newX, newY, 1);
             grassArr.push(newGrass);
-            this.multiply = 0;
+            this.multiply = 2;
         }
     }
 }
+/*
+if(mulSpeed==1){
+    setInterval(mul ,1000)
+}
+else if(mulSpeed==2){
+    setInterval(mul ,500)
+}
+else if(mulSpeed==0.5){
+    setInterval(mul(),2000)
+}
+else if(mulSpeed==0){
+    setInterval(this.mul(),10000)
+}*/
