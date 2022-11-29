@@ -1,32 +1,55 @@
 var LivingCreature = require("./LivingCreature.js")
+var info = {
+    "season": "spring",
+}
+var days = 0;
+function season() {
+    days++
+    if (days < 30) {
+        info.season = "spring"
+    }
+    else if (days >= 30 && days < 60) {
+        info.season = "summer";
+    }
+    else if (days >= 60 && days < 90) {
+        info.season = "fall"
+    }
+    else if (days >= 90 && days < 120) {
+        info.season = "winter"
+    }
+}
+setInterval(season, 250)
 module.exports = class Grass extends LivingCreature {
 
-  mul() {
+    mul() {
         this.multiply++;
         var emptyCells = super.chooseCell(0);
         var newCell = super.random(emptyCells);
 
-        if (newCell && this.multiply >= 8) {
+        if (newCell && this.multiply >= 4) {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = 1;
 
             var newGrass = new Grass(newX, newY, 1);
             grassArr.push(newGrass);
-            this.multiply = 2;
+            if (info.season == "spring") {
+                this.multiply = 2;
+                console.log(this.multiply + "-grassSpeed");
+            }
+            else if (info.season == "summer") {
+                this.multiply = 3;
+                console.log(this.multiply + "grassSpeed");
+            }
+            else if (info.season == "fall") {
+                this.multiply = 1;
+                console.log(this.multiply + "grassSpeed");
+            }
+            else if (info.season == "winter") {
+                this.multiply = 0;
+                console.log(this.multiply + "grassSpeed");
+            }
         }
     }
+
 }
-/*
-if(mulSpeed==1){
-    setInterval(mul ,1000)
-}
-else if(mulSpeed==2){
-    setInterval(mul ,500)
-}
-else if(mulSpeed==0.5){
-    setInterval(mul(),2000)
-}
-else if(mulSpeed==0){
-    setInterval(this.mul(),10000)
-}*/

@@ -1,4 +1,3 @@
-
 express = require('express');
 
 app = express();
@@ -15,17 +14,6 @@ app.get('/', function (req, res) {
     res.redirect('index.html');
 
 });
-days = 0;
-var info = {
-    "season" : "spring",
-     "grass" : 0,
-     "grasseater" : 0,
-     "predator" : 0,
-     "energy" : 0,
-     "energy2" : 0,
-     "blackhole" : 0
-}
-
 
 LivingCreature = require("./Programming3/LivingCreature.js")
 Grass = require("./Programming3/Grass.js")
@@ -43,7 +31,14 @@ PredatorArr = []
 energyArr = []
 energy2Arr = []
 blackholeArr = []
-
+var stat = {
+    "grass" : 0,
+    "grasseater" : 0,
+    "predator" : 0,
+    "energy" : 0,
+    "energy2" : 0,
+    "blackhole" : 0
+}
 function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
     matrix = []
     for (let i = 0; i < matLen; i++) {
@@ -111,7 +106,7 @@ function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
 }
 
 
-matrix = generate(20, 55, 22, 5, 5, 5, 1)
+matrix = generate(20, 100, 22, 5, 5, 5, 1)
 
 
 
@@ -165,27 +160,16 @@ function game() {
     for (var i in blackholeArr) {
         blackholeArr[i].chooseCell5()
     }
-    
-    days++
-    if (days < 30) { info.season = "spring"
-}
-    else if (days >= 30 && days < 60) { info.season = "summer";
-}
-    else if (days >= 60 && days < 90) { info.season = "fall"  
-}
-    else if(days >= 90 && days < 120) { info.season = "winter"
-}
-
-   info.grass = grassArr.length;
-   info.grasseater = grassEaterArr.length;
-   info.predator = PredatorArr.length;
-   info.energy = energyArr.length;
-   info.energy2 = energy2Arr.length;
-   info.blackhole = blackholeArr.length;
-   console.log(info);
+    stat.grass = grassArr.length;
+    stat.grasseater = grassEaterArr.length;
+    stat.predator = PredatorArr.length;
+    stat.energy = energyArr.length;
+    stat.energy2 = energy2Arr.length;
+    stat.blackhole = blackholeArr.length;
+   
   io.sockets.emit("send matrix", matrix);
 }
-setInterval(game, 300)
+setInterval(game, 350)
 
 //avelacnel,vor cuyc ta statistican,
 //exanaki popoxutyuny guynerov ev ,

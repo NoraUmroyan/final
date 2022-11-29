@@ -2,7 +2,7 @@ var LivingCreature = require("./LivingCreature.js")
 module.exports = class Energy extends LivingCreature {
     constructor(x, y) {
         super(x, y)
-        this.energy = 30;
+        this.energy = 10;
 
     }
     getNewCoordinates() {
