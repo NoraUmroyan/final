@@ -18,7 +18,7 @@ function season() {
         info.season = "winter"
     }
 }
-setInterval(season, 250)
+setInterval(season, 350)
 module.exports = class Grass extends LivingCreature {
 
     mul() {
