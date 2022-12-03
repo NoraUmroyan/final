@@ -11,7 +11,7 @@ function setup() {
 
 }
 
-function season1(season){
+function season1(){
     days++
     if (days < 50) { season = "spring"
 }
