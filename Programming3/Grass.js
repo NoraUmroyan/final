@@ -5,16 +5,16 @@ var info = {
 var days = 0;
 function season() {
     days++
-    if (days < 30) {
+    if (days < 50) {
         info.season = "spring"
     }
-    else if (days >= 30 && days < 60) {
+    else if (days >= 50 && days < 100) {
         info.season = "summer";
     }
-    else if (days >= 60 && days < 90) {
+    else if (days >= 150 && days < 200) {
         info.season = "fall"
     }
-    else if (days >= 90 && days < 120) {
+    else {
         info.season = "winter"
     }
 }
@@ -30,24 +30,20 @@ module.exports = class Grass extends LivingCreature {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = 1;
-
             var newGrass = new Grass(newX, newY, 1);
             grassArr.push(newGrass);
             if (info.season == "spring") {
                 this.multiply = 2;
-                console.log(this.multiply + "-grassSpeed");
             }
             else if (info.season == "summer") {
                 this.multiply = 3;
-                console.log(this.multiply + "grassSpeed");
             }
             else if (info.season == "fall") {
-                this.multiply = 1;
-                console.log(this.multiply + "grassSpeed");
+                this.multiply = 1;    
             }
             else if (info.season == "winter") {
                 this.multiply = 0;
-                console.log(this.multiply + "grassSpeed");
+            
             }
         }
     }

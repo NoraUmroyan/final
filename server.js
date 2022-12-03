@@ -22,24 +22,31 @@ Predator = require("./Programming3/Predator.js")
 BlackHole = require("./Programming3/BlackHole.js")
 Energy = require("./Programming3/Energy.js")
 Energy2 = require("./Programming3/Energy2.js")
+Virus = require("./Programming3/virus.js")
 
 server.listen(3000);
 
-grassArr = []
-grassEaterArr = []
-PredatorArr = []
-energyArr = []
-energy2Arr = []
-blackholeArr = []
+grassArr = [];
+grassEaterArr = [];
+PredatorArr = [];
+energyArr = [];
+energy2Arr = [];
+blackholeArr = [];
+virusArr = [];
+
 var stat = {
     "grass" : 0,
     "grasseater" : 0,
     "predator" : 0,
     "energy" : 0,
     "energy2" : 0,
-    "blackhole" : 0
+    "blackhole" : 0,
+    "virus" : 0
 }
-function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
+
+
+
+function generate(matLen, gr, grEat, predator, energy, energy2, blackhole, virus) {
     matrix = []
     for (let i = 0; i < matLen; i++) {
         matrix[i] = []
@@ -90,23 +97,30 @@ function generate(matLen, gr, grEat, predator, energy, energy2, blackhole) {
         if (matrix[y][x] == 0) {
             matrix[y][x] = 6
         }
-        if (matrix[y + 1][x + 1] == 0) {
+        else if (matrix[y + 1][x + 1] == 0) {
             matrix[y + 1][x + 1] = 6
         }
 
-        if (matrix[y][x + 1] == 0) {
+        else if (matrix[y][x + 1] == 0) {
             matrix[y][x + 1] = 6
         }
 
-        if (matrix[y + 1][x] == 0) {
+        else if (matrix[y + 1][x] == 0) {
             matrix[y + 1][x] = 6
         }
     }
-    return matrix
+     for (let i = 0; i < virus; i++) {
+        let x = Math.floor(Math.random() * matLen)
+        let y = Math.floor(Math.random() * matLen)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 7
+        }
+    }
+    return matrix;
 }
 
 
-matrix = generate(20, 100, 22, 5, 5, 5, 1)
+matrix = generate(35, 50, 22, 5, 5, 5, 1, 2)
 
 
 
@@ -136,9 +150,13 @@ for (var y = 0; y < matrix.length; y++) {
             let gr = new BlackHole(x, y)
             blackholeArr.push(gr)
         }
-
+        else if (matrix[y][x] == 7) {
+            let gr = new Virus(x, y)
+            virusArr.push(gr)
+        }
     }
 }
+
 
 function game() {
     for (var i in grassArr) {
@@ -158,7 +176,10 @@ function game() {
         energy2Arr[i].die()
     }
     for (var i in blackholeArr) {
-        blackholeArr[i].chooseCell5()
+        blackholeArr[i].die()
+    }
+    for (var i in virusArr) {
+        virusArr[i].die()
     }
     stat.grass = grassArr.length;
     stat.grasseater = grassEaterArr.length;
@@ -166,14 +187,10 @@ function game() {
     stat.energy = energyArr.length;
     stat.energy2 = energy2Arr.length;
     stat.blackhole = blackholeArr.length;
-   
+    stat.virus = virusArr.length;
+    console.log(stat);
   io.sockets.emit("send matrix", matrix);
+
 }
 setInterval(game, 350)
-
-//avelacnel,vor cuyc ta statistican,
-//exanaki popoxutyuny guynerov ev ,
-//ete stacvi,naev xoti bazmacman aragutyuny poxvi yst exanaki
-//avelacnel nor heros` virus,vorin kpnelov mi hetaqrqir ban klini
-//mek el knopkaner avelacnel,vor virus avelacnenq,kam xaxy sksvi sxmeluc
 

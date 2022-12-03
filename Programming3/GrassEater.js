@@ -2,7 +2,7 @@ var LivingCreature = require("./LivingCreature.js")
 module.exports = class GrassEater extends LivingCreature {
     constructor(x, y) {
         super(x, y);
-        this.energy = 15;
+        this.energy = 25;
     }
     getNewCoordinates() {
         this.directions = [
@@ -60,6 +60,8 @@ module.exports = class GrassEater extends LivingCreature {
         var newCell1 = super.random(emptyCells1);
         var emptyCells2 = this.chooseCell1(6);
         var newCell2 = super.random(emptyCells2);
+        var emptyCells3 = this.chooseCell1(7);
+        var newCell3 = super.random(emptyCells3);
         if (newCell) {
             this.energy++
             var newX = newCell[0];
@@ -80,14 +82,15 @@ module.exports = class GrassEater extends LivingCreature {
             }
         }
         else if (newCell1) {
-            this.energy += 3
-            console.log(this.energy);
+            this.energy += 5
 
         }
         else if (newCell2) {
             this.die()
         }
-
+        else if (newCell3) {
+            this.energy -= 5
+        }
         else {
             this.move()
         }

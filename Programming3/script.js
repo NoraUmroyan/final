@@ -1,30 +1,29 @@
 var socket = io();
-var side = 20;
+var side = 25;
 var matrix = [];
 var days = 0;
+var season = "spring"
 
-var info = {
-    "season" : "spring",
-    
-}
-function season(){
-    days++
-    if (days < 30) { info.season = "spring"
-}
-    else if (days >= 30 && days < 60) { info.season = "summer";
-}
-    else if (days >= 60 && days < 90) { info.season = "fall"  
-}
-    else if(days >= 90 && days < 120) { info.season = "winter"
-}
- console.log(info.season);
-}
 function setup() {
     frameRate(5);
-    createCanvas(20 * side, 20 * side);
+    createCanvas(25 * side, 25 * side);
     background("grey");
 
 }
+
+function season1(season){
+    days++
+    if (days < 50) { season = "spring"
+}
+    else if (days >= 50 && days < 100) { season = "summer";
+}
+    else if (days >= 100 && days < 150) { season = "fall"  
+}
+    else { season = "winter"
+}
+ console.log(season);
+}
+
 
 function draww(matrix) {
     for (var y = 0; y < matrix.length; y++) {
@@ -33,16 +32,16 @@ function draww(matrix) {
             if (matrix[y][x] == 0) {
                 fill("#acacac");
             }
-            else if (matrix[y][x] == 1 && info.season == "spring") {
+            else if (matrix[y][x] == 1 && season == "spring") {
                 fill("green");
             }
-            else if (matrix[y][x] == 1 && info.season == "summer") {
+            else if (matrix[y][x] == 1 && season == "summer") {
                 fill("green");
             }
-            else if (matrix[y][x] == 1 && info.season == "fall") {
+            else if (matrix[y][x] == 1 && season == "fall") {
                 fill("brown");
             }
-            else if (matrix[y][x] == 1 && info.season == "winter") {
+            else if (matrix[y][x] == 1 && season == "winter") {
                 fill("white");
             }
             
@@ -61,6 +60,9 @@ function draww(matrix) {
             else if (matrix[y][x] == 6) {
                 fill("black");
             }
+            else if (matrix[y][x] == 7) {
+                fill("pink");
+            }
 
             rect(x * side, y * side, side, side);
 
@@ -69,6 +71,7 @@ function draww(matrix) {
     }
 
 }
+
 socket.on('send matrix', draww)
-setInterval(season, 350)
+setInterval(season1, 350)
 

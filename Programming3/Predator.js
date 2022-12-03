@@ -2,7 +2,7 @@ var LivingCreature = require("./LivingCreature.js")
 module.exports = class Predator extends LivingCreature {
     constructor(x, y) {
         super(x, y)
-        this.energy = 15;
+        this.energy = 25;
 
     }
     getNewCoordinates() {
@@ -60,6 +60,8 @@ module.exports = class Predator extends LivingCreature {
         var newCell1 = super.random(emptyCells1);
         var emptyCells2 = this.chooseCell2(6);
         var newCell2 = super.random(emptyCells2);
+        var emptyCells3 = this.chooseCell2(7);
+        var newCell3 = super.random(emptyCells3);
         if (newCell) {
             this.energy++
             var newX = newCell[0];
@@ -78,12 +80,15 @@ module.exports = class Predator extends LivingCreature {
                 this.mul()
             }
         } else if (newCell1) {
-            this.energy += 8
+            this.energy += 5
 
-            console.log(this.energy);
 
         } else if (newCell2) {
             this.die()
+        }
+        else if (newCell3) {
+            this.energy -= 5
+    
         }
         else {
             this.move()
